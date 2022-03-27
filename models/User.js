@@ -22,11 +22,20 @@ module.exports = (sequelize,DataTypes) => {
             type: DataTypes.ENUM,
             values: ['admin','wikusama'],
             defaultValue: 'wikusama'
+          },
+          foto_profile: {
+            type: DataTypes.STRING,
           }
     }, {
         tableName: 'User',
         timestamps: false
     });
+
+    User.associate = models => {
+        User.hasMany(models.Biodata, {
+            foreignKey: "user_id"
+        });
+    }
 
     return User;
 }

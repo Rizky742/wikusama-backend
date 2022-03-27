@@ -27,7 +27,8 @@ app.post('/', async (req, res) => {
     let data = {
         email: req.body.email,
         username: req.body.username,
-        password
+        password,
+        foto_profile: req.body.foto_profile
     }
 
     await User.create(data)

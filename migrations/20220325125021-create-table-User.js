@@ -24,6 +24,9 @@ module.exports = {
       role: {
         type: Sequelize.ENUM,
         values: ['admin','wikusama']
+      },
+      foto_profile: {
+        type: Sequelize.STRING(255),
       }
     });
     await queryInterface.addConstraint('User', {

@@ -10,12 +10,19 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
+      nama_lengkap: {
+        type: Sequelize.STRING(25)
+      },
       user_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false
       },
       angkatan: {
         type: Sequelize.CHAR(2),
+      },
+      jurusan : {
+        type: Sequelize.ENUM,
+        values: ['Elektronika Informatika', 'Teknik Informatika', 'Teknik Komputer dan Jaringan', 'Rekayasa Perangkat Lunak']
       },
       tahun_lulus: {
         type: Sequelize.STRING(11)
