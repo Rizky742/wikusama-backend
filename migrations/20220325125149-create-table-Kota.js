@@ -11,7 +11,7 @@ module.exports = {
         allowNull: false
       },
       nama: {
-        type: Sequelize.STRING(30)
+        type: Sequelize.STRING(255)
       },
       id_provinsi : {
         type: Sequelize.INTEGER(11)
