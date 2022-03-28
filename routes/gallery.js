@@ -42,10 +42,6 @@ function checkFileType(file, cb) {
   const isExtnameValid = allowedExtnames.test(path.extname(file.originalname).toLowerCase());
   const isMimeTypeValid = allowedMimeTypes.includes(file.mimetype);
 
-  console.log(path.extname(file.originalname).toLowerCase());
-  console.log(isExtnameValid);
-  console.log(isMimeTypeValid);
-
   if (isExtnameValid && isMimeTypeValid) {
     return cb(null, true);
   } else {
