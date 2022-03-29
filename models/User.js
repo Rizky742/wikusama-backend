@@ -35,6 +35,9 @@ module.exports = (sequelize,DataTypes) => {
         User.hasMany(models.Biodata, {
             foreignKey: "user_id"
         });
+        User.hasMany(models.Foto,  {
+            foreignKey: "owner_id"
+        });
     }
 
     return User;
