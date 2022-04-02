@@ -18,7 +18,7 @@ auth = (req, res, next) => {
                     message: "Invalid token"
                 })
             } else {
-                console.log(user);
+                req.user = user;
                 next()
             }
         })

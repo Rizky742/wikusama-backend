@@ -9,10 +9,15 @@ const register = require('./routes/register');
 const login = require('./routes/login');
 const alamat = require('./routes/alamat')
 const biodata = require('./routes/biodata')
+<<<<<<< HEAD
 const deleteUser = require('./routes/delete-user')
 const findUser = require('./routes/find-user')
 const editProfile = require('./routes/edit-profile')
 const editPassword = require('./routes/edit-password')
+=======
+const user = require('./routes/users')
+const gallery = require('./routes/gallery');
+>>>>>>> 1dcd6603fb85be6fe71c25cfc0f18c94a5e76d96
 
 const app = express();
 
@@ -28,9 +33,14 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/alamat', alamat);
 app.use('/biodata', biodata);
+<<<<<<< HEAD
 app.use('/delete-user', deleteUser);
 app.use('/find-user', findUser);
 app.use('/edit-profile', editProfile);
 app.use('/edit-password', editPassword);
+=======
+app.use('/user', user);
+app.use('/gallery', gallery);
+>>>>>>> 1dcd6603fb85be6fe71c25cfc0f18c94a5e76d96
 
 module.exports = app;

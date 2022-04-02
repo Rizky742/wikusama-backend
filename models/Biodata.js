@@ -40,11 +40,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "user_id"
         })
 
-
         Biodata.belongsTo(models.Kota, {
             foreignKey: "kota_asal",
             as : "kotaAsal"
         })
+        
         Biodata.belongsTo(models.Kota, {
             foreignKey: "kota_domisili",
             as : "kotaDomisili"

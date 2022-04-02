@@ -12,6 +12,17 @@ module.exports = {
       nama_lengkap: {
         type: Sequelize.STRING(25)
       },
+<<<<<<< HEAD
+=======
+      user_id: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        references : {
+          model : "user",
+          key : "user_id"
+        }
+      },
+>>>>>>> 1dcd6603fb85be6fe71c25cfc0f18c94a5e76d96
       angkatan: {
         type: Sequelize.CHAR(2),
       },

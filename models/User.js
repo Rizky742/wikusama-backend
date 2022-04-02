@@ -1,6 +1,6 @@
 module.exports = (sequelize,DataTypes) => {
     const User = sequelize.define('User', {
-        id: {
+        user_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
@@ -34,6 +34,9 @@ module.exports = (sequelize,DataTypes) => {
     User.associate = models => {
         User.hasMany(models.Biodata, {
             foreignKey: "user_id"
+        });
+        User.hasMany(models.Foto,  {
+            foreignKey: "owner_id"
         });
     }
 
