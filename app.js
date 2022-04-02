@@ -9,6 +9,10 @@ const register = require('./routes/register');
 const login = require('./routes/login');
 const alamat = require('./routes/alamat')
 const biodata = require('./routes/biodata')
+const deleteUser = require('./routes/delete-user')
+const findUser = require('./routes/find-user')
+const editProfile = require('./routes/edit-profile')
+const editPassword = require('./routes/edit-password')
 
 const app = express();
 
@@ -24,5 +28,9 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/alamat', alamat);
 app.use('/biodata', biodata);
+app.use('/delete-user', deleteUser);
+app.use('/find-user', findUser);
+app.use('/edit-profile', editProfile);
+app.use('/edit-password', editPassword);
 
 module.exports = app;

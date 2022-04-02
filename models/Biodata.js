@@ -1,17 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
     const Biodata = sequelize.define('Biodata', {
-        id: {
+          user_id: {
             type: DataTypes.INTEGER(11),
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
+            allowNull: false,
+            primaryKey: true
           },
           nama_lengkap: {
             type: DataTypes.STRING(25)
-          },
-          user_id: {
-            type: DataTypes.INTEGER(11),
-            allowNull: false
           },
           angkatan: {
             type: DataTypes.CHAR(2),

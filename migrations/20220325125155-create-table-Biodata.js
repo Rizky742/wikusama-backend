@@ -4,18 +4,13 @@ module.exports = {
   async up(queryInterface, Sequelize) {
 
     await queryInterface.createTable('Biodata', {
-      id: {
+      user_id: {
         type: Sequelize.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
       },
       nama_lengkap: {
         type: Sequelize.STRING(25)
-      },
-      user_id: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false
       },
       angkatan: {
         type: Sequelize.CHAR(2),

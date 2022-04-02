@@ -6,24 +6,6 @@ const { Provinsi } = require('../models')
 const { Kota } = require('../models')
 
 app.post('/', async(req,res) => {
-    // let data = {
-    //     nama_lengkap : req.body.nama_lengkap,
-    //     jurusan : req.body.jurusan,
-    //     tahun_lulus : req.body.tahun_lulus,
-    //     kota_asal : 
-    // }
-    
-    // Object.keys(region).map(index => {
-    //     let data = {
-    //         nama : region[index].provinsi
-    //     }
-        
-    //     // res.json(result)
-    //     Provinsi.create(data)
-    //     .then(result => {
-    //         console.log(result)
-    //     })
-    // })
 
     region.map((result,index) => {
         index++
@@ -46,10 +28,6 @@ app.post('/', async(req,res) => {
     res.json({
         message: "sukses"
     })
-    // for(let i=0; i<region.length; i++){
-    //     console.log(region[i].provinsi)
-    // }
-    // res.json(region[0].provinsi)
 })
 
 module.exports = app

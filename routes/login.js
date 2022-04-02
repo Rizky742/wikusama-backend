@@ -5,7 +5,6 @@ const v = new Validator();
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const SECRET_KEY = "wikusamaoyee";
-const auth = require('../auth')
 const { User } = require('../models/')
 
 app.post('/', async(req,res) => {
