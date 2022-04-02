@@ -9,6 +9,7 @@ const register = require('./routes/register');
 const login = require('./routes/login');
 const alamat = require('./routes/alamat')
 const biodata = require('./routes/biodata')
+const user = require('./routes/users')
 
 const app = express();
 
@@ -24,5 +25,6 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/alamat', alamat);
 app.use('/biodata', biodata);
+app.use('/user', user);
 
 module.exports = app;

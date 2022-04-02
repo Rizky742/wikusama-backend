@@ -15,7 +15,11 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER(11),
-        allowNull: false
+        allowNull: false,
+        references : {
+          model : "user",
+          key : "user_id"
+        }
       },
       angkatan: {
         type: Sequelize.CHAR(2),
