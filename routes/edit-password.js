@@ -3,7 +3,7 @@ const app = express();
 const bcrypt = require('bcrypt');
 const { User } = require('../models');
 
-app.put('/:user_id', async(req,res) => {
+app.put('/:user_id', auth, async(req,res) => {
   let cari = await User.findOne({where : {id : req.params.user_id}})
   let oldPassword = await bcrypt.compare(req.body.oldPassword, cari.password)
   if(!oldPassword){

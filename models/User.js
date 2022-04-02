@@ -1,6 +1,6 @@
 module.exports = (sequelize,DataTypes) => {
     const User = sequelize.define('User', {
-        user_id: {
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
@@ -25,6 +25,7 @@ module.exports = (sequelize,DataTypes) => {
           },
           foto_profile: {
             type: DataTypes.STRING,
+            defaultValue : 'images/user/icon-user.png'
           }
     }, {
         tableName: 'User',

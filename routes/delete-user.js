@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const { Biodata } = require('../models');
 const { User } = require('../models');
+const fs = require("fs")
 
 app.delete('/:id',auth,(req,res) => {
     let param = {id: req.params.id}
@@ -11,6 +12,9 @@ app.delete('/:id',auth,(req,res) => {
         if(!result) {
             return res.json("user tidak ditemukan")
         }
+        let oldFileName = result.foto_profile
+        let dir = path.join(__dirname,"../image/user",oldFileName)
+        fs.unlink(dir, err => console.log(err))
         User.destroy({where : param})
         .then(() => {
             Biodata.destroy({where : param2})

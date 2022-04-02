@@ -3,12 +3,46 @@ const app = express();
 
 const { Biodata } = require('../models');
 const { User } = require('../models');
+const path = require("path")
+const fs = require("fs")
+const multer = require("multer")
+const auth = require('../auth')
+
+const storage = multer.diskStorage({
+    destination:(req,file,cb) => {
+        cb(null,"./public/images/user/")
+    },
+
+    filename: (req,file,cb) => {
+        cb(null, "img-" + Date.now() + path.extname(file.originalname))
+    }
+})
+
+let upload = multer({storage: storage})
 
 
-app.put('/:user_id', auth, async(req,res) => {
+app.put('/:user_id',  auth, upload.single("foto_profile"), async(req,res) => {
 
     let data = {
-        username : req.body.username,
+        username : req.body.username
+    }
+
+    if(req.file){
+         data = {
+            username : req.body.username,
+            foto_profile : `images/user/${req.file.filename}`
+        }
+        await User.findOne({where: {id : req.params.user_id}})
+        .then(result => {
+            let oldFileName = result.foto_profile
+            if(oldFileName !=='images/user/icon-user.png'){
+                let dir = path.join(__dirname, "../public/"+oldFileName)
+                fs.unlink(dir, err => console.log(err))
+            }
+        })
+        .catch(error => {
+            console.log(error.message);
+        })
     }
 
     User.update(data, {where : {id : req.params.user_id}})

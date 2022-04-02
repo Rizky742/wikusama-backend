@@ -5,9 +5,25 @@ const { Biodata } = require('../models')
 const { User } = require('../models')
 const { Kota } = require('../models')
 const { Provinsi } = require('../models')
+const multer = require("multer")
+const path = require("path")
+const fs = require("fs")
 const auth = require('../auth')
 
-app.post('/', auth, async (req, res) => {
+const storage = multer.diskStorage({
+    destination:(req,file,cb) => {
+        cb(null,"./public/images/user/")
+    },
+
+    filename: (req,file,cb) => {
+        cb(null, "img-" + Date.now() + path.extname(file.originalname))
+    }
+})
+
+let upload = multer({storage: storage})
+
+
+app.post('/', auth,upload.single("foto_profile") , async (req, res) => {
     let data = {
         nama_lengkap: req.body.nama_lengkap,
         user_id: req.body.user_id,
@@ -16,16 +32,33 @@ app.post('/', auth, async (req, res) => {
         tahun_lulus: req.body.tahun_lulus,
         kota_asal: req.body.kota_asal,
         provinsi_asal: req.body.provinsi_asal,
+        
         kota_domisili: req.body.kota_domisili,
         provinsi_domisili: req.body.provinsi_domisili
     }
+    let data2 = {
+        foto_profile : `images/user/${req.file.filename}`
+    }
+
     Biodata.create(data)
         .then(respons => {
-            res.json(respons)
+            User.update(data2, {where : {id : data.user_id}})
+            .then(() => {
+                res.json({
+                    message: respons,
+                    path: `images/user/${req.file.filename}`
+                })
+            })
+            .catch(error => {
+                res.json(error)
+            })
+        })
+        .catch(error => {
+            res.json(error)
         })
 })
 
-app.get('/', auth, async (req, res) => {
+app.get('/', async (req, res) => {
     Biodata.findAll({
         include: [
             {
@@ -59,7 +92,7 @@ app.get('/', auth, async (req, res) => {
         })
 })
 
-app.get('/:id', auth, async (req, res) => {
+app.get('/:id', async (req, res) => {
     let user_id = req.params.id
     Biodata.findOne({
         where: {
