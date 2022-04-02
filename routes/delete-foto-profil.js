@@ -3,9 +3,10 @@ const app = express();
 const path = require("path")
 const fs = require("fs")
 const { User } = require("../models")
+const auth = require('../auth')
 
 
-app.delete('/:user_id',async(req,res) => {
+app.delete('/:user_id',auth,async(req,res) => {
     try{
         let param = { id: req.params.user_id}
         let result = await User.findOne({where: param})
