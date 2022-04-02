@@ -1,15 +1,20 @@
 'use strict';
-
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Foto', {
       id: {
-        type: Sequelize.INTEGER(11),
-        primaryKey: true,
+        allowNull: false,
         autoIncrement: true,
-        allowNull: false
+        primaryKey: true,
+        type: Sequelize.INTEGER(11)
+      },
+      owner_id: {
+        type: Sequelize.INTEGER(11)
       },
       path: {
+        type: Sequelize.STRING(255)
+      },
+      judul: {
         type: Sequelize.STRING(255)
       },
       deskripsi: {
@@ -17,14 +22,10 @@ module.exports = {
       },
       alamat: {
         type: Sequelize.STRING(255)
-      },
+      }
     });
-
   },
-
   async down(queryInterface, Sequelize) {
-
     await queryInterface.dropTable('Foto');
-
   }
 };

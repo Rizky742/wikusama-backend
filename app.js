@@ -10,6 +10,7 @@ const login = require('./routes/login');
 const alamat = require('./routes/alamat')
 const biodata = require('./routes/biodata')
 const user = require('./routes/users')
+const gallery = require('./routes/gallery');
 
 const app = express();
 
@@ -26,5 +27,6 @@ app.use('/login', login);
 app.use('/alamat', alamat);
 app.use('/biodata', biodata);
 app.use('/user', user);
+app.use('/gallery', gallery);
 
 module.exports = app;
