@@ -13,7 +13,7 @@ app.delete('/:id',auth,(req,res) => {
             return res.json("user tidak ditemukan")
         }
         let oldFileName = result.foto_profile
-        let dir = path.join(__dirname,"../image/user",oldFileName)
+        let dir = path.join(__dirname,"../public/",oldFileName)
         fs.unlink(dir, err => console.log(err))
         User.destroy({where : param})
         .then(() => {
