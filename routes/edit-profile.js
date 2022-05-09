@@ -61,6 +61,10 @@ app.put('/:user_id',  auth, upload.single("foto_profile"), async(req,res) => {
         kota_asal : req.body.kota_asal,
         provinsi_domisili : req.body.provinsi_domisili,
         kota_domisili : req.body.kota_domisili,
+        quotes: req.body.quotes,
+        last_position: req.body.last_position,
+        phone_number: req.body.phone_number,
+        profession: req.body.profession
     }
 
     Biodata.update(data2, {where : {user_id : req.params.user_id}})

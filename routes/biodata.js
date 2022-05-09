@@ -11,19 +11,19 @@ const fs = require("fs")
 const auth = require('../auth')
 
 const storage = multer.diskStorage({
-    destination:(req,file,cb) => {
-        cb(null,"./public/images/user/")
+    destination: (req, file, cb) => {
+        cb(null, "./public/images/user/")
     },
 
-    filename: (req,file,cb) => {
+    filename: (req, file, cb) => {
         cb(null, "img-" + Date.now() + path.extname(file.originalname))
     }
 })
 
-let upload = multer({storage: storage})
+let upload = multer({ storage: storage })
 
 
-app.post('/', auth,upload.single("foto_profile") , async (req, res) => {
+app.post('/', auth, upload.single("foto_profile"), async (req, res) => {
     let data = {
         nama_lengkap: req.body.nama_lengkap,
         user_id: req.body.user_id,
@@ -32,38 +32,51 @@ app.post('/', auth,upload.single("foto_profile") , async (req, res) => {
         tahun_lulus: req.body.tahun_lulus,
         kota_asal: req.body.kota_asal,
         provinsi_asal: req.body.provinsi_asal,
-        
         kota_domisili: req.body.kota_domisili,
-        provinsi_domisili: req.body.provinsi_domisili
+        provinsi_domisili: req.body.provinsi_domisili,
+        quotes: req.body.quotes,
+        last_position: req.body.last_position,
+        phone_number: req.body.phone_number,
+        profession: req.body.profession
     }
+    let foto = await User.findByPk(data.user_id)
     let data2 = {
-        foto_profile : `images/user/${req.file.filename}`
+        foto_profile: `${foto.foto_profile}`
+    }
+    if (foto.foto_profile) {
+        data2 = {
+            foto_profile: `${foto.foto_profile}`
+        }
+    }else{
+        data2 = {
+            foto_profile: `images/user/${req.file.filename}`
+        }
     }
 
     Biodata.create(data)
         .then(respons => {
-            User.update(data2, {where : {id : data.user_id}})
-            .then(() => {
-                res.json({
-                    message: respons,
-                    path: `images/user/${req.file.filename}`
+            User.update(data2, { where: { id: data.user_id } })
+                .then(() => {
+                    res.json({
+                        message: respons,
+                        path: data2.foto_profile
+                    })
                 })
-            })
-            .catch(error => {
-                res.json(error)
-            })
+                .catch(error => {
+                    res.json(error)
+                })
         })
         .catch(error => {
             res.json(error)
         })
 })
 
-app.get('/', async (req, res) => {
+app.get('/', auth, async (req, res) => {
     Biodata.findAll({
         include: [
             {
                 model: User,
-                attributes: ['username','email','role','foto_profile']
+                attributes: ['username', 'email', 'role', 'foto_profile']
             },
             {
                 model: Kota,

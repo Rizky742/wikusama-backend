@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
           user_id: {
             type: DataTypes.INTEGER(11),
             allowNull: false,
-            primaryKey: true
+            primaryKey: true,
+            unique: true
           },
           nama_lengkap: {
             type: DataTypes.STRING(25)
@@ -14,6 +15,18 @@ module.exports = (sequelize, DataTypes) => {
           jurusan : {
             type: DataTypes.ENUM,
             values: ['Elektronika Informatika', 'Teknik Informatika', 'Teknik Komputer dan Jaringan', 'Rekayasa Perangkat Lunak']
+          },
+          quotes: {
+            type: DataTypes.TEXT,
+          },
+          last_position: {
+            type: DataTypes.STRING(25),
+          },
+          phone_number: {
+            type: DataTypes.STRING(30),
+          },
+          profession: {
+            type: DataTypes.STRING(25),
           },
           tahun_lulus: {
             type: DataTypes.STRING(11)

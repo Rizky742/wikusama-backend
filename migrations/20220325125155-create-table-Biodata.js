@@ -3,12 +3,13 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Biodata', {
-      nama_lengkap: {
-        type: Sequelize.STRING(25)
-      },
       user_id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
+        unique: true,
+      },
+      nama_lengkap: {
+        type: Sequelize.STRING(25)
       },
       angkatan: {
         type: Sequelize.CHAR(2),
@@ -16,6 +17,18 @@ module.exports = {
       jurusan : {
         type: Sequelize.ENUM,
         values: ['Elektronika Informatika', 'Teknik Informatika', 'Teknik Komputer dan Jaringan', 'Rekayasa Perangkat Lunak']
+      },
+      quotes: {
+        type: Sequelize.TEXT,
+      },
+      last_position: {
+        type: Sequelize.STRING(25),
+      },
+      phone_number: {
+        type: Sequelize.STRING(30),
+      },
+      profession: {
+        type: Sequelize.STRING(25),
       },
       tahun_lulus: {
         type: Sequelize.STRING(11)
