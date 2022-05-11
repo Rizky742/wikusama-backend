@@ -17,7 +17,7 @@ app.post('/', async (req, res) => {
     const validate = v.validate(req.body, schema);
 
     if (validate.length) {
-        return res.status(404).json({
+        return res.status(400).json({
             status: 'error',
             message: validate
         })
